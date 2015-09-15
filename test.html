@@ -6,28 +6,29 @@
 <body>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/rollups/hmac-sha256.js"></script>
-<script src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/components/enc-base64-min.js"></script>
+<!--script src="http://crypto-js.googlecode.com/svn/tags/3.0.2/build/components/enc-base64-min.js"></script-->
 
 <script type="text/javascript">
 	var timestamp = Date.now();
 	var timestamp = parseInt(timestamp/1000);
-	//var url = 'http://localhost/heracles/public/';
-	
-	var url = 'http://api.aeaturismo.com.br/v1/';
+	var url = 'http://localhost/heracles/public/';
+	//var url = 'http://site.aeaturismo.com.br/heracles/public/';
+	//var url = 'http://api.aeaturismo.com.br/v1/';
 
 	var str = 'GET ' + url + 'package/16/pax/2/starts_at/2015-08-05 '+timestamp+' 9dAQnFHCrWS4OJuz';
 
     var hash = CryptoJS.HmacSHA256(str, "wEy8wRPdaUZgIpHa");
-	var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
-	var caminho    = url+"package/16/pax/2/starts_at/2015-08-05";
+	//var hashInBase64 = CryptoJS.enc.Base64.stringify(hash);
+	var path    = url+"package/16/pax/2/starts_at/2015-08-05";
 	var api_public_key = '9dAQnFHCrWS4OJuz';
 	var parameters = '?api_key='+ api_public_key + '&time_stamp=' + timestamp + '&signature=' + hash;
 
 	$.ajax({
-	    crossDomain: true,
-	    url: caminho + parameters,
+	    //crossDomain: true,
+	    url: path + parameters,
 	    type: 'GET',
-	    dataType: 'json',
+	    //dataType: 'JSONP',
+	    dataType: 'JSON',
 	    async: true
 	})
 	.done( function(data)
